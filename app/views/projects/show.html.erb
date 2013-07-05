@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @project.name %>
+</p>
+
+<p>
+  <b>Creator:</b>
+  <%= User.find(@project.hostid).name %>
+</p>
+
+<p>
+  <b>Collaborators:</b></br>
+  <% @project.users.each do |u| %>
+    <%= u.name %></br>
+  <% end %>
+</p>
+
+
+<%= link_to 'Back', projects_path %>

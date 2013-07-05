@@ -1,0 +1,15 @@
+<%= form_for(@project) do |f| %>
+<!--   <div class="field"> -->
+    Название<br />
+<!--     <br /> -->
+    <%= f.text_field :name %><br />
+<!--   </div> -->
+<!--   <div class="field"> -->
+   Представьтесь<br />
+<!--    <br /> -->
+  <%= f.text_field :hostid %>
+<!--   </div> -->
+  <div class="actions" value="Отправить">
+    <%= f.submit "Отправить" %>
+  </div>
+<% end %>
