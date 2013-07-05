@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password_digest, :remember_token
+  has_and_belongs_to_many :projects
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
