@@ -1,0 +1,28 @@
+<%= form_for(@task) do |f| %>
+  
+
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    content<br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :masterid %><br />
+    <%= f.text_field :masterid %>
+  </div>
+  <div class="field">
+    <%= f.label :project_id %><br />
+    <%= f.text_field :project_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

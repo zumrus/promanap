@@ -34,4 +34,9 @@ class ProjectsController < ApplicationController
       render 'edit'
     end
   end
+  
+  def destroy
+    Project.find(params[:id]).destroy
+    redirect_to projects_path
+  end
 end

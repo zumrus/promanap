@@ -3,9 +3,11 @@
 <%= link_to "Новый проект", new_project_path, class: "btn btn-large btn-info" %>
 </br></br>
 <% @projects.reverse.each do |pr| %>
-  <%= User.find(pr.hostid).name %>
+  <h2><%= User.find(pr.hostid).name %></h2>
   <h2> <%= link_to pr.name, pr %>  </h2>
-  </br></br>
+ 
+  <h3><%= link_to 'Destroy', pr, method: :delete, data: { confirm: 'Are you sure?' } %> </h3>
+  </br>
 <% end %>
 
 

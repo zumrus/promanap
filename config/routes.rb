@@ -1,6 +1,10 @@
 Promanap::Application.routes.draw do
+
   resources :users
+  resources :tasks
   resources :projects
+#   put "edit_task"
+#   match "edit_task" => 'tasks#update', :as => :put
   
 
   # The priority is based upon order of creation:

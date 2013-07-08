@@ -17,5 +17,60 @@
   <% end %>
 </p>
 
+<%= link_to 'Добавить задачу', new_task_path(:task => { :status => false, :project_id => @project.id, :masterid => 3})%> </br>
 
-<%= link_to 'Back', projects_path %>
+<!-- <% tt=Task.new  masterid: 3, status: false, project_id: @project.id%> -->
+<!--<%= form_for(tt) do |f| %>  
+
+  <div class="field">
+    <%= f.label :masterid %><br />
+    <%= f.text_field :masterid %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    content<br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>-->
+
+<table width="100%" cellspacing="0" cellpadding="0">
+   <tr> 
+    <td valign="top">
+   <h2> To Do </h2>
+    <ul>
+      <% @project.tasks.reverse.each do |u| %>
+	<% if !u.status? %>
+	  </br><li><%= u.name %>
+	    <%= link_to 'Отметить как "готово"', task_path(u, :task => { :status => !u.status}, :controller => :tasks, :action => :update, :id => u.id), :method => :put%> </li></br>
+	    <%= u.content %></br>
+	    <%= link_to 'Удалить', u, method: :delete  %></br>
+	<% end %>
+      <% end %>
+    </ul>
+    </td>
+    <td valign="top">
+    <h2> Done </h2>
+    <ul>
+      <% @project.tasks.reverse.each do |u| %>
+	<% if u.status? %>
+	  <li><%= u.name %>
+ 	    <%= link_to 'Отметить как "не готово"', task_path(u, :task => { :status => !u.status}, :controller => :tasks, :action => :update, :id => u.id), :method => :put%> </li> </br>
+ 	    <%= u.content %></br>
+ 	    <%= link_to 'Удалить', u, method: :delete  %></br>
+	<% end %>
+      <% end %>
+    </ul>
+    </td>
+   </tr>
+ </table>
+
+
+
+
+<%= link_to 'К списку проектов', projects_path %>
