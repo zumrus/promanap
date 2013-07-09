@@ -1,8 +1,11 @@
 Promanap::Application.routes.draw do
 
-  resources :users
+  devise_for :users
+
   resources :tasks
   resources :projects
+  
+  root :to => 'projects#index' 
 #   put "edit_task"
 #   match "edit_task" => 'tasks#update', :as => :put
   

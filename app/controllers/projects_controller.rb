@@ -1,10 +1,12 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
      @projects = Project.all
   end
   
   def new
-    @project = Project.new
+    @project = Project.new(params[:project])
   end
 
   def create

@@ -7,6 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if current_user %>
+    Вы - <%= current_user.name %>. 
+    <%= link_to 'Настройки', edit_user_registration_path %></br>
+    Не Вы?
+<%=link_to 'Выйти', destroy_user_session_path, method: :delete%>
+  <% else %>
+<%=link_to 'Регистрация', new_user_registration_path %>
+<%=link_to 'Войти', new_user_session_path %>
+  <% end %>
+</div>
 
 <%= yield %>
 
