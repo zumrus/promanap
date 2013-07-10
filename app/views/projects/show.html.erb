@@ -13,9 +13,19 @@
 <p>
   <b>Collaborators:</b></br>
   <% @project.users.each do |u| %>
-    <%= u.name %></br>
+    <%= u.name %>
+      <% if current_user.id==@project.hostid || current_user.id==u.id %>
+	<%= link_to 'Убрать из проекта',{controller: "users", action: "remove_from_project", :id => u.id, :project_id => @project.id}  %></br>
+      <% end %>
   <% end %>
 </p>
+
+
+<%= form_tag({controller: "users", action: "search"}, method: "get", project_id: @project.id) do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= text_field_tag :project_id, params[:project_id], :value =>  @project.id %>
+  <%= submit_tag "Search", :email => nil %>
+<% end %>
 
 <%= link_to 'Добавить задачу', new_task_path(:task => { :status => false, :project_id => @project.id, :masterid => 3})%> </br>
 

@@ -1,0 +1,20 @@
+</br>
+<% if @user.blank? %>
+No such a user
+<% else %>
+<%= @user.name %>
+
+<% end %>
+</br>
+<%= params %>
+</br>
+<%= Project.find(params[:project_id]).users %>
+</br></br></br></br>
+<!--<%= params[:search] %>
+<%= "%#{params[:search]}%" %>
+
+</br>
+<%= User.search(params[:search]) %>
+<%= User.find_by_email("#{params[:search]}")%>-->
+<!-- <%= User.find_by_email("v@v.v")%> -->
+

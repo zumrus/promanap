@@ -1,6 +1,11 @@
 Promanap::Application.routes.draw do
 
   devise_for :users
+  resources :users, :only => [:index]
+#   get 'users#search'
+  get 'users/search'
+  get 'users/remove_from_project'
+
 
   resources :tasks
   resources :projects
