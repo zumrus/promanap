@@ -1,67 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
-
-<p>
-  <b>Creator:</b>
-  <%= User.find(@project.hostid).name %>
-</p>
-
-<p>
-  <b>Collaborators:</b></br>
-  <% @project.users.each do |u| %>
-    <%= u.name %>
-      <% if current_user.id==@project.hostid || current_user.id==u.id %>
-	<%= link_to 'Убрать из проекта',{controller: "users", action: "remove_from_project", :id => u.id, :project_id => @project.id}  %></br>
-      <% end %>
+<% if current_user.id==@project.hostid %>
+  <%= render 'host'%>
+<% else %>
+  <% if @project.users.include?(current_user) %>
+    <%= render 'collaborator'%>
+  <% else %>
+  Вы, вероятно, заблудились?</br>
+  <%= link_to 'Вернуться к своим проектам', projects_path %>
   <% end %>
-</p>
-
-
-<%= form_tag({controller: "users", action: "search"}, method: "get", project_id: @project.id) do %>
-  <%= text_field_tag :search, params[:search] %>
-  <%= text_field_tag :project_id, params[:project_id], :value =>  @project.id %>
-  <%= submit_tag "Search", :email => nil %>
 <% end %>
-
-<%= link_to 'Добавить задачу', new_task_path(:task => { :status => false, :project_id => @project.id, :masterid => 3})%> </br>
-
-
-<table width="100%" cellspacing="0" cellpadding="0">
-   <tr> 
-    <td valign="top">
-   <h2> To Do </h2>
-    <ul>
-      <% @project.tasks.reverse.each do |u| %>
-	<% if !u.status? %>
-	  </br><li><%= u.name %>
-	    <%= link_to 'Отметить как "готово"', task_path(u, :task => { :status => !u.status}, :controller => :tasks, :action => :update, :id => u.id), :method => :put%> </li></br>
-	    <%= u.content %></br>
-	    <%= link_to 'Удалить', u, method: :delete  %></br>
-	<% end %>
-      <% end %>
-    </ul>
-    </td>
-    <td valign="top">
-    <h2> Done </h2>
-    <ul>
-      <% @project.tasks.reverse.each do |u| %>
-	<% if u.status? %>
-	  </br><li><%= u.name %>
- 	    <%= link_to 'Отметить как "не готово"', task_path(u, :task => { :status => !u.status}, :controller => :tasks, :action => :update, :id => u.id), :method => :put%> </li> </br>
- 	    <%= u.content %></br>
- 	    <%= link_to 'Удалить', u, method: :delete  %></br>
-	<% end %>
-      <% end %>
-    </ul>
-    </td>
-   </tr>
- </table>
-
-
-
-
-<%= link_to 'К списку проектов', projects_path %>

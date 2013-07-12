@@ -4,9 +4,8 @@
 </br></br>
 <% @projects.reverse.each do |pr| %>
   <h2><%= User.find(pr.hostid).name %></h2>
-  <h2> <%= link_to pr.name, pr %>  </h2>
- 
-  <h3><%= link_to 'Destroy', pr, method: :delete, data: { confirm: 'Are you sure?' } %> </h3>
+  <h2> <%= link_to pr.name, pr %>  </h2> 
+  <h3><%= link_to 'Удалить проект', pr, method: :delete, data: { confirm: 'Are you sure?' } %> </h3>
   </br>
 <% end %>
 

@@ -1,0 +1,65 @@
+<p>
+  <b>Название проекта:</b>
+  <%= @project.name %>
+</p>
+
+<p>
+  <b>Руководитель:</b>
+  <%= User.find(@project.hostid).name %>
+</p>
+
+<p>
+  <b>Сотрудники:</b></br>
+  <% @project.users.each do |u| %>
+    <%= u.name %>
+      <% if current_user.id==u.id %>
+	<%= link_to 'Убрать из проекта',{controller: "users", action: "remove_from_project", :id => u.id, :project_id => @project.id}  %>
+      <% end %>
+      </br>
+  <% end %>
+</p>
+
+
+<table width="100%" cellspacing="0" cellpadding="0">
+   <tr> 
+    <td valign="top">
+   <h2> To Do </h2>
+    <ul>
+      <% @project.tasks.reverse.each do |u| %>
+	<% if !u.status? %>
+	  <% if u.users.include?(current_user) %>
+	    </br><li><%= u.name %></li></br>
+	      Исполнители: </br> 
+	      <% u.users.each do |uu|%>
+		<%= uu.name %></br> 
+	      <% end %> 	    
+	      <%= u.content %></br>
+	  <% end %>
+	<% end %>
+      <% end %>
+    </ul>
+    </td>
+    <td valign="top">
+    <h2> Done </h2>
+    <ul>
+      <% @project.tasks.reverse.each do |u| %>
+	<% if u.status? %>
+	  <% if u.users.include?(current_user) %>
+	    </br><li><%= u.name %></li></br>
+	      Исполнители: </br> 
+	      <% u.users.each do |uu|%>
+		<%= uu.name %></br> 
+	      <% end %> 	    
+	      <%= u.content %></br>
+	  <% end %>
+	<% end %>
+      <% end %>
+    </ul>
+    </td>
+   </tr>
+ </table>
+
+
+
+
+<%= link_to 'К списку проектов', projects_path %>

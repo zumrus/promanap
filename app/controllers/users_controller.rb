@@ -6,6 +6,11 @@ class UsersController < ApplicationController
   def remove_from_project
     @user=User.find(params[:id])
     @project=Project.find(params[:project_id])
+    @project.tasks.each do |t|
+      if t.users.include?(@user)
+	t.users=t.users-[@user]
+      end
+    end
     @project.users=@project.users-[@user]
     redirect_to @project
   end
