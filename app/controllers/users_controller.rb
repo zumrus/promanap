@@ -15,6 +15,14 @@ class UsersController < ApplicationController
     redirect_to @project
   end
   
+  def remove_from_task
+    @user=User.find(params[:id])
+    @task=Task.find(params[:task_id])
+    @project=@task.project
+    @task.users=@task.users-[@user]
+    redirect_to @project
+  end
+  
   def search
     @user=User.search(params[:search])
     @project=Project.find(params[:project_id])
@@ -25,6 +33,22 @@ class UsersController < ApplicationController
 	redirect_to @project, :flash => { :error => "Already works!" }
       else
 	@project.users=@project.users+[@user] 
+	redirect_to @project
+      end
+    end
+  end
+  
+  def search_for_task
+    @user=User.search(params[:search])
+    @task=Task.find(params[:task_id])
+    @project=@task.project
+    if @user.blank?
+    redirect_to @project, :flash => { :error => "No such a user!" }
+    else
+      if @task.users.include?(@user)
+	redirect_to @project, :flash => { :error => "Already works!" }
+      else
+	@task.users=@task.users+[@user] 
 	redirect_to @project
       end
     end

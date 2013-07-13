@@ -5,7 +5,8 @@ Promanap::Application.routes.draw do
 #   get 'users#search'
   get 'users/search'
   get 'users/remove_from_project'
-
+  get 'users/search_for_task'
+  get 'users/remove_from_task'
 
   resources :tasks
   resources :projects

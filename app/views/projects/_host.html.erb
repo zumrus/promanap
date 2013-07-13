@@ -17,10 +17,10 @@
 </p>
 
 <b>Добавить сотрудника</b></br>
-<%= form_tag({controller: "users", action: "search"}, method: "get", :params => {:project_id => @project.id }) do %>
+<%= form_tag({controller: "users", action: "search"}, method: "get" ) do %>
   Найти по емайлу: <%= text_field_tag :search, params[:search] %>
   <%= hidden_field_tag :project_id, params[:project_id], :value =>  @project.id %>
-  <%= submit_tag "Search", :email => nil %>
+  <%= submit_tag "Искать", :email => nil %>
 <% end %>
 
 
@@ -29,7 +29,7 @@
 
 <table width="100%" cellspacing="0" cellpadding="0">
    <tr> 
-    <td valign="top">
+    <td valign="top" width="40%">
    <h2> To Do </h2>
     <ul>
       <% @project.tasks.reverse.each do |u| %>
@@ -37,27 +37,42 @@
 	  </br><li><%= u.name %>
 	    <%= link_to 'Отметить как "готово"', task_path(u, :task => { :status => !u.status}, :controller => :tasks, :action => :update, :id => u.id), :method => :put%> </li></br>
  	    Исполнители: </br> <% u.users.each do |uu|%>
-	      <%= uu.name %></br> 
+	      <%= uu.name %>
+	      <%= link_to 'Убрать из задачи',{controller: "users", action: "remove_from_task", :id => uu.id, :task_id => u.id}  %></br> 
 	    <% end %> 	    
  	    <%= u.content %></br>
 	    <%= link_to 'Удалить', u, method: :delete  %></br>
 	    <%= link_to 'Изменить', edit_task_path %></br>
+	    <b>Добавить испонителя</b></br>
+	    <%= form_tag({controller: "users", action: "search_for_task"}, method: "get") do %>
+	      Найти по емайлу: <%= text_field_tag :search, params[:search] %>
+	      <%= hidden_field_tag :task_id, params[:task_id], :value =>  u.id %>
+	      <%= submit_tag "Искать", :email => nil %>
+	    <% end %>
 	<% end %>
       <% end %>
     </ul>
     </td>
-    <td valign="top">
+    <td valign="top" width="40%">
     <h2> Done </h2>
     <ul>
       <% @project.tasks.reverse.each do |u| %>
 	<% if u.status? %>
 	  </br><li><%= u.name %>
- 	    <%= link_to 'Отметить как "не готово"', task_path(u, :task => { :status => !u.status}, :controller => :tasks, :action => :update, :id => u.id), :method => :put%> </li> </br>
+	    <%= link_to 'Отметить как "не готово"', task_path(u, :task => { :status => !u.status}, :controller => :tasks, :action => :update, :id => u.id), :method => :put%> </li></br>
  	    Исполнители: </br> <% u.users.each do |uu|%>
-	      <%= uu.name %> </br>
+	      <%= uu.name %>
+	      <%= link_to 'Убрать из задачи',{controller: "users", action: "remove_from_task", :id => uu.id, :task_id => u.id}  %></br> 
 	    <% end %> 	    
  	    <%= u.content %></br>
- 	    <%= link_to 'Удалить', u, method: :delete  %></br>
+	    <%= link_to 'Удалить', u, method: :delete  %></br>
+	    <%= link_to 'Изменить', edit_task_path %></br>
+	    <b>Добавить испонителя</b></br>
+	    <%= form_tag({controller: "users", action: "search_for_task"}, method: "get") do %>
+	      Найти по емайлу: <%= text_field_tag :search, params[:search] %>
+	      <%= hidden_field_tag :task_id, params[:task_id], :value =>  u.id %>
+	      <%= submit_tag "Искать", :email => nil %>
+	    <% end %>
 	<% end %>
       <% end %>
     </ul>
