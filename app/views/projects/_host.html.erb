@@ -17,9 +17,9 @@
 </p>
 
 <b>Добавить сотрудника</b></br>
-<%= form_tag({controller: "users", action: "search"}, method: "get", project_id: @project.id) do %>
+<%= form_tag({controller: "users", action: "search"}, method: "get", :params => {:project_id => @project.id }) do %>
   Найти по емайлу: <%= text_field_tag :search, params[:search] %>
-  <%= text_field_tag :project_id, params[:project_id], :value =>  @project.id %>
+  <%= hidden_field_tag :project_id, params[:project_id], :value =>  @project.id %>
   <%= submit_tag "Search", :email => nil %>
 <% end %>
 
