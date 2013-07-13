@@ -11,18 +11,18 @@
     <%= f.text_area :content %>
   </div>
 
-<!--  <div class="field">
-    <%= f.label :masterid %><br />
-    <%= f.text_field :masterid %>
-  </div>-->
-<!--  <div class="field">
-    <%= f.label :project_id %><br />
-    <%= f.text_field :project_id %>
-  </div>-->
-<!--  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  </div>-->
+<!--   <div class="field"> -->
+<!--     <%= f.label :masterid %><br /> -->
+    <%= f.hidden_field :masterid, :value => params[:task][:masterid] %>
+<!--   </div> -->
+<!-- <div class="field"> -->
+<!--     <%= f.label :project_id %><br /> -->
+    <%= f.hidden_field :project_id, :value => params[:task][:project_id] %>
+<!--   </div> -->
+<!--  <div class="field"> -->
+<!--     <%= f.label :status %><br /> -->
+    <%= f.hidden_field :status, :value => params[:task][:status] %>
+<!--   </div> -->
 
 <!--  <p>
   <b>Исполнители:</b></br>
@@ -35,6 +35,6 @@
 
   
   <div class="actions">
-    <%= f.submit "Создать" %>
+    <%= f.submit "Отправить" %>
   </div>
 <% end %>

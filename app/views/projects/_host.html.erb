@@ -10,6 +10,9 @@
 
 <p>
   <b>Сотрудники:</b></br>
+  <% if @project.users.blank? %>
+    Пока никого, Вы в одиночестве
+  <% end %>
   <% @project.users.each do |u| %>
     <%= u.name %>
     <%= link_to 'Убрать из проекта',{controller: "users", action: "remove_from_project", :id => u.id, :project_id => @project.id}  %></br>
@@ -20,7 +23,7 @@
 <%= form_tag({controller: "users", action: "search"}, method: "get" ) do %>
   Найти по емайлу: <%= text_field_tag :search, params[:search] %>
   <%= hidden_field_tag :project_id, params[:project_id], :value =>  @project.id %>
-  <%= submit_tag "Искать", :email => nil %>
+  <%= submit_tag "Добавить", :email => nil %>
 <% end %>
 
 

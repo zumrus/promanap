@@ -1,5 +1,9 @@
-<h1>New task</h1>
+<h1>Новая задача</h1>
+
+<%= params %>
+<%= Project.find(params[:task][:project_id]) %>
+
 
 <%= render 'form' %>
 
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Назад к проекту', Project.find(params[:task][:project_id]) %>
