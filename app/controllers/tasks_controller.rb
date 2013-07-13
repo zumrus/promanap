@@ -14,9 +14,9 @@ class TasksController < ApplicationController
     end
   end
 
-  def show
-    @task=Task.find(params[:id])
-  end
+#   def show
+#     @task=Task.find(params[:id])
+#   end
 
   def edit
     @task=Task.find(params[:id])
@@ -36,13 +36,8 @@ class TasksController < ApplicationController
     redirect_to @task.project
   end
 
-  def index
-    @tasks=Task.all
-  end
-  
-#   def switch
-#     @task=Task.find(params[:id])
-#     nst=!@task.status
-#     @task.update_attributes({status: nst})
+#   def index
+#     @tasks=Task.all
 #   end
+  
 end

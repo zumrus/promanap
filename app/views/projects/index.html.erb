@@ -1,20 +1,15 @@
-<h1>Проекты</h1>
+<h1>Ваши проекты</h1>
 
 <%= link_to "Новый проект", new_project_path(:project => { :hostid => current_user.id}), class: "btn btn-large btn-info" %>
-</br></br>
+<br /><br />
 <% @projects.reverse.each do |pr| %>
-  <h2><%= User.find(pr.hostid).name %></h2>
-  <h2> <%= link_to pr.name, pr %>  </h2> 
-  <h3><%= link_to 'Удалить проект', pr, method: :delete, data: { confirm: 'Are you sure?' } %> </h3>
-  </br>
+  <h2>Название проекта: <%= link_to pr.name, pr %>  </h2> 
+  <% if current_user.id==pr.hostid %> 
+    <h2>Руководитель: Вы </h2>
+    <h3><%= link_to 'Удалить проект', pr, method: :delete, data: { confirm: 'Точно?' } %> </h3>
+<% else %>    
+    <h2>Руководитель: <%= User.find(pr.hostid).name %></h2>
+ <% end %>
+  <br />
 <% end %>
 
-<!--<%=link_to 'Регистрация', new_user_registration_path %>
-
-
-<%=link_to 'Войти', new_user_session_path %>
-<%=link_to 'Выйти', destroy_user_session_path, method: :delete%>
-<% if user_signed_in? %>
-<%= link_to 'Настройки', edit_user_registration_path %>
-<%= current_user.name %>
-<% end %>-->

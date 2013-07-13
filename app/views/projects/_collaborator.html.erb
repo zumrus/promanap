@@ -9,13 +9,13 @@
 </p>
 
 <p>
-  <b>Сотрудники:</b></br>
+  <b>Сотрудники:</b><br />
   <% @project.users.each do |u| %>
     <%= u.name %>
       <% if current_user.id==u.id %>
 	<%= link_to 'Убрать из проекта',{controller: "users", action: "remove_from_project", :id => u.id, :project_id => @project.id}  %>
       <% end %>
-      </br>
+      <br />
   <% end %>
 </p>
 
@@ -28,12 +28,12 @@
       <% @project.tasks.reverse.each do |u| %>
 	<% if !u.status? %>
 	  <% if u.users.include?(current_user) %>
-	    </br><li><%= u.name %></li></br>
-	      Исполнители: </br> 
+	    <br /><li><%= u.name %></li><br />
+	      Исполнители: <br /> 
 	      <% u.users.each do |uu|%>
-		<%= uu.name %></br> 
+		<%= uu.name %><br /> 
 	      <% end %> 	    
-	      </br><%= u.content %></br>
+	      <br /><%= u.content %><br />
 	  <% end %>
 	<% end %>
       <% end %>
@@ -45,12 +45,12 @@
       <% @project.tasks.reverse.each do |u| %>
 	<% if u.status? %>
 	  <% if u.users.include?(current_user) %>
-	    </br><li><%= u.name %></li></br>
-	      Исполнители: </br> 
+	    <br /><li><%= u.name %></li><br />
+	      Исполнители: <br /> 
 	      <% u.users.each do |uu|%>
-		<%= uu.name %></br> 
+		<%= uu.name %><br /> 
 	      <% end %> 	    
-	      </br><%= u.content %></br>
+	      <br /><%= u.content %><br />
 	  <% end %>
 	<% end %>
       <% end %>

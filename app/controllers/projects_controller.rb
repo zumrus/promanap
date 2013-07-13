@@ -12,7 +12,6 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-#       flash[:success] = "Welcome to the Sample App!"
       redirect_to @project
     else
       render 'new'
@@ -30,7 +29,6 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-#       flash[:success] = "Profile updated"
       redirect_to @project
     else
       render 'edit'
