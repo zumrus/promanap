@@ -48,9 +48,10 @@
 	    <%= link_to 'Изменить', edit_task_path(u) %></br>
 	    <b>Добавить испонителя</b></br>
 	    <%= form_tag({controller: "users", action: "search_for_task"}, method: "get") do %>
-	      Найти по емайлу: <%= text_field_tag :search, params[:search] %>
+	      Выбрать по имени:
+	       <%= select_tag(:search, options_from_collection_for_select((@project.users-u.users), :email, :name)) %>
 	      <%= hidden_field_tag :task_id, params[:task_id], :value =>  u.id %>
-	      <%= submit_tag "Искать", :email => nil %>
+	      <%= submit_tag "Добавить", :email => nil %>
 	    <% end %>
 	<% end %>
       <% end %>
@@ -72,9 +73,10 @@
 	    <%= link_to 'Изменить', edit_task_path(u) %></br>
 	    <b>Добавить испонителя</b></br>
 	    <%= form_tag({controller: "users", action: "search_for_task"}, method: "get") do %>
-	      Найти по емайлу: <%= text_field_tag :search, params[:search] %>
+	      Выбрать по имени:
+	       <%= select_tag(:search, options_from_collection_for_select((@project.users-u.users), :email, :name)) %>
 	      <%= hidden_field_tag :task_id, params[:task_id], :value =>  u.id %>
-	      <%= submit_tag "Искать", :email => nil %>
+	      <%= submit_tag "Добавить", :email => nil %>
 	    <% end %>
 	<% end %>
       <% end %>
