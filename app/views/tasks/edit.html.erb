@@ -1,5 +1,20 @@
 <h1>Изменение задачи</h1>
 
-<%= render 'form' %>
+<%= form_for(@task) do |f| %>
+
+  <div class="field">
+    Имя задачи:<br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    Суть:<br />
+    <%= f.text_area :content %>
+  </div>
+
+  
+  <div class="actions">
+    <%= f.submit "Применить" %>
+  </div>
+<% end %>
 
 <%= link_to 'Назад к проекту', @task.project %>

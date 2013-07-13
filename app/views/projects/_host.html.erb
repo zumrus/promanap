@@ -43,9 +43,9 @@
 	      <%= uu.name %>
 	      <%= link_to 'Убрать из задачи',{controller: "users", action: "remove_from_task", :id => uu.id, :task_id => u.id}  %></br> 
 	    <% end %> 	    
- 	    <%= u.content %></br>
+ 	    </br><%= u.content %></br>
 	    <%= link_to 'Удалить', u, method: :delete  %></br>
-	    <%= link_to 'Изменить', edit_task_path %></br>
+	    <%= link_to 'Изменить', edit_task_path(u) %></br>
 	    <b>Добавить испонителя</b></br>
 	    <%= form_tag({controller: "users", action: "search_for_task"}, method: "get") do %>
 	      Найти по емайлу: <%= text_field_tag :search, params[:search] %>
@@ -67,9 +67,9 @@
 	      <%= uu.name %>
 	      <%= link_to 'Убрать из задачи',{controller: "users", action: "remove_from_task", :id => uu.id, :task_id => u.id}  %></br> 
 	    <% end %> 	    
- 	    <%= u.content %></br>
+ 	    </br><%= u.content %></br>
 	    <%= link_to 'Удалить', u, method: :delete  %></br>
-	    <%= link_to 'Изменить', edit_task_path %></br>
+	    <%= link_to 'Изменить', edit_task_path(u) %></br>
 	    <b>Добавить испонителя</b></br>
 	    <%= form_tag({controller: "users", action: "search_for_task"}, method: "get") do %>
 	      Найти по емайлу: <%= text_field_tag :search, params[:search] %>

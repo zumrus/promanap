@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   def create
     @task=Task.new(params[:task])
     if @task.save
-      redirect_to Project.find(params[:task][:project_id])
+      redirect_to @task.project
     else
       render 'new'
     end
