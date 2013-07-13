@@ -27,10 +27,10 @@ class UsersController < ApplicationController
     @user=User.search(params[:search])
     @project=Project.find(params[:project_id])
     if @user.blank?
-    redirect_to @project, :flash => { :error => "No such a user!" }
+    redirect_to @project, notice: 'There is no such a user!' # :flash => { :error => "No such a user!" }
     else
       if @project.users.include?(@user) || @project.hostid==@user.id
-	redirect_to @project, :flash => { :error => "Already works!" }
+	redirect_to @project, notice: 'This user already works in this project!'
       else
 	@project.users=@project.users+[@user] 
 	redirect_to @project
@@ -43,10 +43,10 @@ class UsersController < ApplicationController
     @task=Task.find(params[:task_id])
     @project=@task.project
     if @user.blank?
-    redirect_to @project, :flash => { :error => "No such a user!" }
+    redirect_to @project, notice: 'There is no such a user!' 
     else
       if @task.users.include?(@user)
-	redirect_to @project, :flash => { :error => "Already works!" }
+	redirect_to @project, notice: 'This user already works in this task'
       else
 	@task.users=@task.users+[@user] 
 	redirect_to @project
